@@ -1,0 +1,27 @@
+package main
+
+import (
+	"os"
+
+	"github.com/liyatai/gin/data"
+	execute "github.com/liyatai/gin/exec"
+	"github.com/liyatai/gin/writer"
+)
+
+func main() {
+	// fmt.Println("传入：", os.Args[len(os.Args)-1])
+	arg := os.Args[len(os.Args)-1]
+	data.Main("avalon")
+	writer.WriteStringToFile(data.Main(arg), "./main.go")
+	writer.WriteStringToFile(data.Runner(), "./runner.conf")
+	writer.WriteStringToFile(data.Service(), "./service/service.go")
+	writer.WriteStringToFile(data.Db(arg), "./db/db.go")
+	writer.WriteStringToFile(data.Cors(), "./cor/cor.go")
+	writer.WriteStringToFile(data.Controller(arg), "./controller/controller.go")
+	writer.WriteStringToFile(data.Config(), "./config/config.go")
+	writer.WriteStringToFile(data.ConfigYml(), "./config/config.yml")
+
+	// 执行命令
+	execute.DoCommand("go", "mod", "init", arg)
+	execute.DoCommand("go", "mod", "tidy")
+}
