@@ -236,8 +236,7 @@ func GetConfig(str string) string {
 
 func ConfigYml() string {
 
-	model := `
-mysql:
+	model := `mysql:
     url: 数据库地址
     port: 2323
     user: root
