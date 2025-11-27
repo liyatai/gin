@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/liyatai/gin/data"
@@ -8,9 +9,7 @@ import (
 	"github.com/liyatai/gin/writer"
 )
 
-func main() {
-	// fmt.Println("传入：", os.Args[len(os.Args)-1])
-	arg := os.Args[len(os.Args)-1]
+func generator(arg string) {
 	data.Main("avalon")
 	writer.WriteStringToFile(data.Main(arg), "./main.go")
 	writer.WriteStringToFile(data.Runner(), "./runner.conf")
@@ -24,4 +23,14 @@ func main() {
 	// 执行命令
 	execute.DoCommand("go", "mod", "init", arg)
 	execute.DoCommand("go", "mod", "tidy")
+}
+
+func main() {
+	// fmt.Println("传入：", os.Args[len(os.Args)-1])
+	arg := os.Args[len(os.Args)-1]
+	if arg == "-v" {
+		fmt.Println("v1.0.1")
+	} else {
+		generator(arg)
+	}
 }
