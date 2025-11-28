@@ -244,10 +244,7 @@ func ConfigYml() string {
     name: 数据库名字
 server:
     port: 8080
-sqlite: 文件地址
-
-
-	`
+sqlite: 文件地址`
 
 	return model
 }
