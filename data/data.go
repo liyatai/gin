@@ -167,15 +167,30 @@ func Controller(Package string) string {
 package controller
 
 import (
-	"{{.package}}/service"
+	"fmt"
+	"ginTemplate/service"
 
 	"github.com/gin-gonic/gin"
 )
+
+// PrintAllRoutes 打印所有已注册的路由
+func PrintAllRoutes(engine *gin.Engine) {
+	fmt.Println("======= 所有注册的路由 =======")
+	// 遍历所有HTTP方法的路由树
+	for _, methodTree := range engine.Routes() {
+		// methodTree 包含 Method（GET/POST）、Path（路由路径）、Handler（处理器名称）
+		fmt.Printf("方法: %-6s 路径: %-20s 处理器: %s\n",
+			methodTree.Method, methodTree.Path, methodTree.Handler)
+	}
+	fmt.Println("==============================")
+}
 
 // 业务层
 func GetRouter(r *gin.Engine) {
 
 	r.GET("/", service.Hello)
+
+	PrintAllRoutes(r)
 
 }
 
