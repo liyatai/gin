@@ -29,7 +29,7 @@ func main() {
 	// fmt.Println("传入：", os.Args[len(os.Args)-1])
 	arg := os.Args[len(os.Args)-1]
 	if arg == "-v" {
-		fmt.Println("gin generator v1.0.2")
+		fmt.Println("gin generator v1.0.7")
 		fmt.Println("author:liyatai")
 		fmt.Println("blog:https://blog.lyt11.cn")
 	} else {
